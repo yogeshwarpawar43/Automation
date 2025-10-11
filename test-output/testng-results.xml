@@ -2,16 +2,16 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-10-07T11:09:58 IST" name="Default suite" finished-at="2025-10-07T11:09:59 IST" duration-ms="1757">
+  <suite started-at="2025-10-12T03:41:26 IST" name="Suite" finished-at="2025-10-12T03:41:28 IST" duration-ms="1942">
     <groups>
     </groups>
-    <test started-at="2025-10-07T11:09:58 IST" name="Default test" finished-at="2025-10-07T11:09:59 IST" duration-ms="1757">
+    <test started-at="2025-10-12T03:41:26 IST" name="Test" finished-at="2025-10-12T03:41:28 IST" duration-ms="1942">
       <class name="com.selenium.base.BaseClass">
-        <test-method signature="setup()[pri:0, instance:com.selenium.base.BaseClass@7b2bbc3]" started-at="2025-10-07T11:09:58 IST" name="setup" finished-at="2025-10-07T11:09:59 IST" duration-ms="1718" status="PASS">
+        <test-method signature="setup()[pri:0, instance:com.selenium.base.BaseClass@7b2bbc3]" started-at="2025-10-12T03:41:26 IST" name="setup" finished-at="2025-10-12T03:41:28 IST" duration-ms="1905" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
       </class> <!-- com.selenium.base.BaseClass -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
 </testng-results>

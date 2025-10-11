@@ -16,6 +16,7 @@ public class BaseClass {
 		//driver = new ChromeDriver();
 		driver.get("https://www.google.com");
 		driver.manage().window().maximize();
+		System.out.println("added");
 	}
 
 }

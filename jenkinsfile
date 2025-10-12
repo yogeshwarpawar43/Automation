@@ -1,25 +1,56 @@
 pipeline {
     agent any
+
     stages {
+
+        stage('Checkout') {
+            steps {
+                echo 'Fetching code from GitHub...'
+                git branch: 'automationtesting', url: 'https://github.com/yogeshwarpawar43/Automation.git'
+            }
+        }
+
         stage('Build') {
             steps {
                 echo 'Building the project...'
+                // Compile and package the project, skip test execution here
+                sh 'mvn clean install -DskipTests'
             }
         }
-       stage('Deploy') {
+
+        stage('Run Tests') {
+            steps {
+                echo 'Running Selenium + TestNG tests...'
+                // This will execute your TestNG tests defined in pom.xml
+                sh 'mvn test'
+            }
+        }
+
+        stage('Deploy') {
+            when {
+                expression {
+                    // Proceed only if the tests passed successfully
+                    currentBuild.currentResult == 'SUCCESS'
+                }
+            }
             steps {
                 echo 'Deploying application...'
+                // Put your deployment command here
+                sh 'echo "Deployment successful!"'
             }
         }
-        stage('Test') {
-            steps {
-                echo 'Running tests...'
-            }
-        }
-         stage('Release') {
-            steps {
-                echo 'Releaseing application...'
-            }
-        }
-       }
     }
+
+    post {
+        always {
+            echo "Cleaning up workspace..."
+            cleanWs()
+        }
+        success {
+            echo "All stages completed successfully!"
+        }
+        failure {
+            echo "Tests failed — skipping deployment."
+        }
+    }
+}

@@ -2,55 +2,17 @@ pipeline {
     agent any
 
     stages {
-
-        stage('Checkout') {
+        stage('Check Java Version') {
             steps {
-                echo 'Fetching code from GitHub...'
-                git branch: 'automationtesting', url: 'https://github.com/yogeshwarpawar43/Automation.git'
+                // On Windows use 'bat' instead of 'sh'
+                bat 'java -version'
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Building the project...'
-                // Compile and package the project, skip test execution here
-                sh 'mvn clean install -DskipTests'
+                bat 'mvn clean install -DskipTests'
             }
-        }
-
-        stage('Run Tests') {
-            steps {
-                echo 'Running Selenium + TestNG tests...'
-                // This will execute your TestNG tests defined in pom.xml
-                sh 'mvn test'
-            }
-        }
-
-        stage('Deploy') {
-            when {
-                expression {
-                    // Proceed only if the tests passed successfully
-                    currentBuild.currentResult == 'SUCCESS'
-                }
-            }
-            steps {
-                echo 'Deploying application...'
-                // Put your deployment command here
-                sh 'echo "Deployment successful!"'
-            }
-        }
-    }
-
-    post {
-        always {
-            echo "Cleaning up workspace..."
-            cleanWs()
-        }
-        success {
-            echo "All stages completed successfully!"
-        }
-        failure {
-            echo "Tests failed — skipping deployment."
         }
     }
 }

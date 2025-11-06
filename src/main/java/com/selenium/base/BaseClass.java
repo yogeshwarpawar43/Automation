@@ -2,21 +2,40 @@ package com.selenium.base;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.Test;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
+
+import com.selenium.utiles.ConfigReader;
 
 public class BaseClass {
-	
-	WebDriver driver;
-	
-	@Test
-	public void setup() {
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\yoges\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
-		WebDriver driver = new ChromeDriver();
-		//System.setProperty("webdriver.chrome.driver", "C:\Users\yoges\eclipse-workspace\learn.selenium.com\src\test\resources\driversdriverschromedriver.exe");
-		//driver = new ChromeDriver();
-		driver.get("https://www.google.com");
+
+	protected WebDriver driver;
+	protected ConfigReader config;
+	protected ConfigReader testData;
+
+	@BeforeSuite
+	public void setUp() {
+		// Load both property files
+		config = new ConfigReader(
+				"C:\\Users\\yoges\\eclipse-workspace\\SeleniumMaster\\src\\test\\resources\\config\\config.properties");
+		testData = new ConfigReader(
+				"C:\\Users\\yoges\\eclipse-workspace\\SeleniumMaster\\src\\test\\resources\\config\\locators.properties");
+		String browser = config.getProperty("browser");
+		String url = config.getProperty("url");
+
+		if (browser.equalsIgnoreCase("chrome")) {
+			driver = new ChromeDriver();
+		}
+
 		driver.manage().window().maximize();
-		System.out.println("added");
+		driver.get(url);
+	}
+
+	@AfterSuite
+	public void tearDown() {
+		if (driver != null) {
+			driver.quit();
+		}
 	}
 
 }

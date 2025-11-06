@@ -3,11 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.selenium.base.BaseClass">
+      <class name="com.selenium.tests.AutoSelectedTest">
         <methods>
-          <include name="setup"/>
+          <include name="tearDown"/>
+          <include name="autoSelect"/>
+          <include name="setUp"/>
         </methods>
-      </class> <!-- com.selenium.base.BaseClass -->
+      </class> <!-- com.selenium.tests.AutoSelectedTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -6,7 +6,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Fetching code from GitHub...'
-                git branch: 'automationtesting', url: 'https://github.com/yogeshwarpawar43/Automation.git'
+                git branch: 'JenkinsTest', url: 'https://github.com/yogeshwarpawar43/Automation.git'
             }
         }
 

@@ -10,30 +10,31 @@ import com.selenium.utiles.ConfigReader;
 public class BaseClass {
 
 	protected WebDriver driver;
-	protected ConfigReader config;
-	protected ConfigReader testData;
+	protected static ConfigReader config;
+	protected static ConfigReader testData;
 
+	static {
+        try {
+	   String projectPath = System.getProperty("user.dir");
+
+       // Build relative paths to config files
+       String configPath = projectPath + "/src/test/resources/config/config.properties";
+       String testDataPath = projectPath + "/src/test/resources/config/locators.properties";
+
+       // Load both property files
+       config = new ConfigReader(configPath);
+       testData = new ConfigReader(testDataPath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+	
 	@BeforeSuite
 	public void setUp() {
-		// Load both property files
-		/*config = new ConfigReader(
-				"C:\\Users\\yoges\\eclipse-workspace\\SeleniumMaster\\src\\test\\resources\\config\\config.properties");
-		testData = new ConfigReader(
-				"C:\\Users\\yoges\\eclipse-workspace\\SeleniumMaster\\src\\test\\resources\\config\\locators.properties");
-		*/
 		
-        String projectPath = System.getProperty("user.dir");
-
-        // Build relative paths to config files
-        String configPath = projectPath + "/src/test/resources/config/config.properties";
-        String testDataPath = projectPath + "/src/test/resources/config/locators.properties";
-
-        System.out.println("Loading config from: " + configPath);
-        System.out.println("Loading test data from: " + testDataPath);
-
-        // Load both property files
-        config = new ConfigReader(configPath);
-        testData = new ConfigReader(testDataPath);
+		
+     
 		String browser = config.getProperty("browser");
 		String url = config.getProperty("url");
 
